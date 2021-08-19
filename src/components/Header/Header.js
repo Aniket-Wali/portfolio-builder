@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 // nodejs library that concatenate classes
 import classNames from "classnames";
+import {GoogleLogout} from "react-google-login";
+
 
 import PropTypes from "prop-types";
 import { makeStyles } from '@material-ui/core/styles';
@@ -18,6 +20,13 @@ const useStyles = makeStyles(styles);
 
 export default function Header(props) {
     const classes = useStyles();
+    const {setEmail, isLoggedIn, setIsLoggedIn} = props;
+
+    const logout = response => {
+        setEmail("");
+        setIsLoggedIn(false);
+    }
+
     const [mobileOpen, setMobileOpen] = useState(false);
     useEffect(() => {
         if(props.changeColorOnScroll){
@@ -66,6 +75,15 @@ export default function Header(props) {
                 brandComponent
             )}
             </div>
+            {
+                isLoggedIn ? (
+                    <GoogleLogout
+                        clientId="230939070961-rffr63fitbrvv09fdanau0gst5a68lt3.apps.googleusercontent.com"
+                        buttonText="Logout"
+                        onLogoutSuccess={logout}
+                        >
+                    </GoogleLogout>) : null
+            }
         </Toolbar>
         </AppBar>
     );

@@ -14,6 +14,7 @@ import GridItem from "components/Grid/GridItem.js";
 import {GoogleLogin, GoogleLogout} from "react-google-login";
 import Tilt from 'react-tilt';
 
+import ProductSection from "./Sections/ProductSection";
 import styles from "assets/jss/material-kit-react/views/landingPage.js"
 import CreateRoundedIcon from "@material-ui/icons/CreateRounded";
 
@@ -43,11 +44,7 @@ export default function LandingPage(props) {
     setIsLoggedIn(true);
   }
 
-  const logout = response => {
-    setEmail("");
-    setIsLoggedIn(false);
-    console.log(response); 
- }
+  
 
 
 
@@ -73,37 +70,31 @@ export default function LandingPage(props) {
               }
         }
         {...rest}
+        isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
+        setEmail={setEmail}
       />
       <Parallax filter image={require("assets/img/landing-bg.jpg")}>
+      <div className={classes.container}>
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={6}>
+              <h1 className={classes.title}>
+                Create a Portfolio with easy steps.
+              </h1>
+              <h4>
+                Create a digital Portfolio in few minutes, by filling your
+                information. Portfolio Builder will generate the url which
+                you can share to the world.
+              </h4>
+            </GridItem>
+          </GridContainer>
+        </div>
       </Parallax>
-      <div className={classNames(classes.main, classes.mainRaised)}>
+      <div className={classNames(classes.main, classes.mainRaised)} style={{marginBottom: "50px"}}>
         <div className={classes.container} id="section1">
           {isLoggedIn ? (
-            <div className={classes.section}>
-              <GridContainer justify="center">
-                <GridItem
-                  xs={12}
-                  sm={12}
-                  md={12}
-                  style={{ textAlign: "center" }}
-                >
-                  <h3
-                    className={classes.title}
-                    style={{ color: "#222", marginTop: "100px" }}
-                  >
-                    {"Welcome " + email}
-                  </h3>
-                </GridItem>
-                <div style={{ marginTop: "50px", marginBottom: "80px" }} >
-                  <GoogleLogout
-                    clientId="230939070961-rffr63fitbrvv09fdanau0gst5a68lt3.apps.googleusercontent.com"
-                    buttonText="Logout"
-                    onLogoutSuccess={logout}
-                  >
-                  </GoogleLogout>
-                </div>
-              </GridContainer>
-            </div>
+            // if user is Logged in then show the main contents
+            <ProductSection/>
           ) : (
             <div className={classes.section}>
               <GridContainer justify="center">
@@ -117,7 +108,7 @@ export default function LandingPage(props) {
                     className={classes.title}
                     style={{ color: "#222", marginTop: "100px" }}
                   >
-                    Hey there.
+                    {"Welcome to Portfolio Builder"}
                   </h1>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>

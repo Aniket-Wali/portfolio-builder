@@ -94,14 +94,14 @@ export default function LandingPage(props) {
                     {"Welcome " + email}
                   </h3>
                 </GridItem>
-                <span>
+                <div style={{ marginTop: "50px", marginBottom: "80px" }} >
                   <GoogleLogout
                     clientId="230939070961-rffr63fitbrvv09fdanau0gst5a68lt3.apps.googleusercontent.com"
                     buttonText="Logout"
                     onLogoutSuccess={logout}
                   >
                   </GoogleLogout>
-                </span>
+                </div>
               </GridContainer>
             </div>
           ) : (

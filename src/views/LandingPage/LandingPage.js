@@ -14,7 +14,7 @@ import GridItem from "components/Grid/GridItem.js";
 import {GoogleLogin, GoogleLogout} from "react-google-login";
 import Tilt from 'react-tilt';
 
-import ProductSection from "./Sections/ProductSection";
+import PortfolioBuilder from "./Sections/PortfolioBuilder";
 import styles from "assets/jss/material-kit-react/views/landingPage.js"
 import CreateRoundedIcon from "@material-ui/icons/CreateRounded";
 
@@ -94,7 +94,7 @@ export default function LandingPage(props) {
         <div className={classes.container} id="section1">
           {isLoggedIn ? (
             // if user is Logged in then show the main contents
-            <ProductSection/>
+            <PortfolioBuilder/>
           ) : (
             <div className={classes.section}>
               <GridContainer justify="center">

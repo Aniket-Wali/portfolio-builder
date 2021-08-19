@@ -4,7 +4,11 @@ import React, {useState} from "react";
 import classNames from "classnames";
 // material-ui core components
 import { makeStyles } from "@material-ui/core/styles";
-import GoogleLogin from "react-google-login";
+
+import Header from "components/Header/Header.js";
+
+
+import {GoogleLogin, GoogleLogout} from "react-google-login";
 import Tilt from 'react-tilt';
 
 import styles from "assets/jss/material-kit-react/views/landingPage.js"
@@ -30,11 +34,18 @@ export default function LandingPage(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const  responseGoogleSignup = async res => {
+  const  responseGoogleSignup =  res => {
     console.log(res.Ts.Et);
     setEmail(res.Ts.Et);
     setIsLoggedIn(true);
   }
+
+  const logout = response => {
+    setEmail("");
+    setIsLoggedIn(false);
+    console.log(response); 
+ }
+
 
 
   const matches = useMediaQuery("(min-width: 960px)");
@@ -42,16 +53,24 @@ export default function LandingPage(props) {
 
   return (
     <div>
-      <GoogleLogin
-        clientId="230939070961-rffr63fitbrvv09fdanau0gst5a68lt3.apps.googleusercontent.com"
-        onSuccess={responseGoogleSignup}
-        onFailure={responseGoogleSignup}
-        buttonText="Login With Google"
-        cookiePolicy={'single_host_origin'}
-        />
-        <div>
-          { isLoggedIn ? ( email + " is Logged in" ) : ( "Not Logged in" ) }
-        </div>
+      <Header
+        color="transparent"
+        routes={dashboardRoutes}
+        brand="Portfolio Builder"
+        fixed
+        changeColorOnScroll={
+          phone
+            ? {
+                height: 50,
+                color: "success"
+              }
+            : {
+                height: 400,
+                color: "white"
+              }
+        }
+        {...rest}
+      />
     </div>
   );
 }
